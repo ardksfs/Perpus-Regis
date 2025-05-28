@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sistem Penyimpanan Stok Buku Perpustakaan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #stokBuku {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Penyimpanan Stok Buku Perpustakaan</h1>
+    <form id="formBuku">
+        <label for="judul">Judul Buku:</label>
+        <input type="text" id="judul" name="judul" required />
+
+        <label for="penulis">Penulis:</label>
+        <input type="text" id="penulis" name="penulis" required />
+
+        <label for="tahun">Tahun Terbit:</label>
+        <input type="number" id="tahun" name="tahun" min="1000" max="9999" required />
+
+        <label for="jumlah">Jumlah Stok:</label>
+        <input type="number" id="jumlah" name="jumlah" min="1" required />
+
+        <button type="submit">Simpan Buku</button>
+    </form>
+
+    <div id="stokBuku">
+        <h2>Daftar Stok Buku</h2>
+        <table id="tabelStok">
+            <thead>
+                <tr>
+                    <th>Judul Buku</th>
+                    <th>Penulis</th>
+                    <th>Tahun Terbit</th>
+                    <th>Jumlah Stok</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data buku akan ditampilkan di sini -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const formBuku = document.getElementById('formBuku');
+        const tabelStok = document.getElementById('tabelStok').getElementsByTagName('tbody')[0];
+
+        formBuku.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const judul = document.getElementById('judul').value.trim();
+            const penulis = document.getElementById('penulis').value.trim();
+            const tahun = document.getElementById('tahun').value;
+            const jumlah = document.getElementById('jumlah').value;
+
+            // Membuat baris baru untuk tabel
+            const barisBaru = tabelStok.insertRow();
+
+            const cellJudul = barisBaru.insertCell(0);
+            const cellPenulis = barisBaru.insertCell(1);
+            const cellTahun = barisBaru.insertCell(2);
+            const cellJumlah = barisBaru.insertCell(3);
+
+            cellJudul.textContent = judul;
+            cellPenulis.textContent = penulis;
+            cellTahun.textContent = tahun;
+            cellJumlah.textContent = jumlah;
+
+            // Reset form setelah data disimpan
+            formBuku.reset();
+        });
+    </script>
+</body>
+</html>
